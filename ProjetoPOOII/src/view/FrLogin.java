@@ -5,6 +5,13 @@
  */
 package view;
 
+import Utils.Util;
+import controler.UsuarioControler;
+import java.awt.event.KeyEvent;
+import java.net.URL;
+import javax.swing.ImageIcon;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author aluno.saolucas
@@ -43,6 +50,11 @@ public class FrLogin extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Login");
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowOpened(java.awt.event.WindowEvent evt) {
+                formWindowOpened(evt);
+            }
+        });
 
         pnlPrincipal.setBackground(new java.awt.Color(204, 255, 204));
         pnlPrincipal.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -65,17 +77,27 @@ public class FrLogin extends javax.swing.JFrame {
                 edtSenhaActionPerformed(evt);
             }
         });
+        edtSenha.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                edtSenhaKeyPressed(evt);
+            }
+        });
         pnlPrincipal.add(edtSenha, new org.netbeans.lib.awtextra.AbsoluteConstraints(39, 185, 230, -1));
 
         btnEntrar.setBackground(new java.awt.Color(0, 255, 204));
         btnEntrar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/3669407_key_vpn_ic_icon.png"))); // NOI18N
         btnEntrar.setText("ENTRAR");
+        btnEntrar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnEntrarMouseClicked(evt);
+            }
+        });
         btnEntrar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnEntrarActionPerformed(evt);
             }
         });
-        pnlPrincipal.add(btnEntrar, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 233, 130, 30));
+        pnlPrincipal.add(btnEntrar, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 230, 210, 30));
 
         lblLogin.setFont(new java.awt.Font("Tahoma", 0, 36)); // NOI18N
         lblLogin.setText("LOGIN");
@@ -115,6 +137,56 @@ public class FrLogin extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_btnEntrarActionPerformed
 
+    private void btnEntrarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnEntrarMouseClicked
+        logar();
+
+    }//GEN-LAST:event_btnEntrarMouseClicked
+
+    private void edtSenhaKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_edtSenhaKeyPressed
+        if(evt.getKeyCode() == KeyEvent.VK_ENTER){
+            logar();
+        }  
+    }//GEN-LAST:event_edtSenhaKeyPressed
+
+    private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
+
+        //define icone da janela
+        this.setIconImage(Util.getIcone());
+    }//GEN-LAST:event_formWindowOpened
+
+    private boolean verificarCampos(){
+    if(edtUsuario.getText().isEmpty()){
+        JOptionPane.showMessageDialog(rootPane, "Usuário em branco");
+        return false;
+    } 
+    if(new String(edtSenha.getPassword()).isEmpty()){
+        JOptionPane.showMessageDialog(rootPane, "Senha em branco");
+        return false;
+    }
+    return true;
+
+}
+    
+    private void logar(){
+    //if(verificarCampos()){
+       // return;
+   // }
+    //ler os campos
+    String usuario = edtUsuario.getText();
+    String senha = new String(edtSenha.getPassword());
+    
+    UsuarioControler controler = new UsuarioControler();
+    
+    if(controler.autenticar(usuario, senha)){
+        //entra no sistema
+        FrMenu telaMenu = new FrMenu();
+        telaMenu.setVisible(true);
+         this.setVisible(false);
+       
+    }else{
+        JOptionPane.showMessageDialog(rootPane, "USUÁRIO NÃO ENCONTRADO");
+    }
+}
     /**
      * @param args the command line arguments
      */
