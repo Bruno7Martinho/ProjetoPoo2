@@ -4,8 +4,11 @@
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
             <file>file:/C:/Users/aluno.saolucas/Documents/ProjetoPoo2/ProjetoPOOII/src/controler/UsuarioControler.java</file>
+            <file>file:/C:/Users/aluno.saolucas/Documents/ProjetoPoo2/ProjetoPOOII/src/view/FrCadUsuario.java</file>
             <file>file:/C:/Users/aluno.saolucas/Documents/ProjetoPoo2/ProjetoPOOII/src/view/FrLogin.java</file>
+            <file>file:/C:/Users/aluno.saolucas/Documents/ProjetoPoo2/ProjetoPOOII/src/view/FrMenu.java</file>
             <file>file:/C:/Users/aluno.saolucas/Documents/ProjetoPoo2/ProjetoPOOII/src/controler/GerenciadorConexao.java</file>
+            <file>file:/C:/Users/aluno.saolucas/Documents/ProjetoPoo2/ProjetoPOOII/src/Utils/Util.java</file>
         </group>
     </open-files>
 </project-private>

@@ -5,6 +5,11 @@
  */
 package view;
 
+import Model.Usuario;
+import Utils.Util;
+import controler.UsuarioControler;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author aluno.saolucas
@@ -37,12 +42,14 @@ public class FrCadUsuario extends javax.swing.JDialog {
         lblDataNascCAD = new javax.swing.JLabel();
         edtNomeCad = new javax.swing.JTextField();
         edtEmailCad = new javax.swing.JTextField();
-        jFormattedTextField1 = new javax.swing.JFormattedTextField();
+        edtDataNascCad = new javax.swing.JFormattedTextField();
         csCas = new javax.swing.JCheckBox();
         btnCancelarCad = new javax.swing.JButton();
         btnSalvarCad = new javax.swing.JButton();
         edtSenhaCad = new javax.swing.JPasswordField();
         jLabel1 = new javax.swing.JLabel();
+        lblConfirmSenha = new javax.swing.JLabel();
+        edtConfirmSenhaCad = new javax.swing.JPasswordField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Cadastro");
@@ -64,10 +71,10 @@ public class FrCadUsuario extends javax.swing.JDialog {
         lblDataNascCAD.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         lblDataNascCAD.setText("DATA DE NASCIMENTO:");
 
-        jFormattedTextField1.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.DateFormatter(java.text.DateFormat.getDateInstance(java.text.DateFormat.MEDIUM))));
-        jFormattedTextField1.addActionListener(new java.awt.event.ActionListener() {
+        edtDataNascCad.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.DateFormatter(java.text.DateFormat.getDateInstance(java.text.DateFormat.MEDIUM))));
+        edtDataNascCad.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jFormattedTextField1ActionPerformed(evt);
+                edtDataNascCadActionPerformed(evt);
             }
         });
 
@@ -82,12 +89,25 @@ public class FrCadUsuario extends javax.swing.JDialog {
         btnCancelarCad.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         btnCancelarCad.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/cadastro.png"))); // NOI18N
         btnCancelarCad.setText("CANCELAR");
+        btnCancelarCad.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnCancelarCadMouseClicked(evt);
+            }
+        });
 
         btnSalvarCad.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         btnSalvarCad.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/save.png"))); // NOI18N
         btnSalvarCad.setText("SALVAR");
+        btnSalvarCad.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnSalvarCadMouseClicked(evt);
+            }
+        });
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/8665306_circle_user_icon.png"))); // NOI18N
+
+        lblConfirmSenha.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        lblConfirmSenha.setText("CONFIRMAR SENHA");
 
         javax.swing.GroupLayout pnlCadastroLayout = new javax.swing.GroupLayout(pnlCadastro);
         pnlCadastro.setLayout(pnlCadastroLayout);
@@ -102,13 +122,10 @@ public class FrCadUsuario extends javax.swing.JDialog {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 26, Short.MAX_VALUE)
                         .addComponent(lblCadastro)
                         .addGap(90, 90, 90))
-                    .addGroup(pnlCadastroLayout.createSequentialGroup()
-                        .addComponent(edtSenhaCad, javax.swing.GroupLayout.PREFERRED_SIZE, 354, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlCadastroLayout.createSequentialGroup()
                         .addGroup(pnlCadastroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addGroup(pnlCadastroLayout.createSequentialGroup()
-                                .addGap(51, 51, 51)
+                                .addGap(49, 49, 49)
                                 .addComponent(btnCancelarCad)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(btnSalvarCad))
@@ -119,11 +136,19 @@ public class FrCadUsuario extends javax.swing.JDialog {
                                     .addComponent(lblDataNascCAD)
                                     .addComponent(edtNomeCad)
                                     .addComponent(edtEmailCad, javax.swing.GroupLayout.DEFAULT_SIZE, 364, Short.MAX_VALUE)
-                                    .addComponent(jFormattedTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 196, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(edtDataNascCad, javax.swing.GroupLayout.PREFERRED_SIZE, 196, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(lblSenhaCad))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(csCas)))
-                        .addGap(121, 121, 121))))
+                        .addGap(121, 121, 121))
+                    .addGroup(pnlCadastroLayout.createSequentialGroup()
+                        .addComponent(lblConfirmSenha)
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addGroup(pnlCadastroLayout.createSequentialGroup()
+                        .addGroup(pnlCadastroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addComponent(edtConfirmSenhaCad)
+                            .addComponent(edtSenhaCad, javax.swing.GroupLayout.DEFAULT_SIZE, 354, Short.MAX_VALUE))
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
         );
         pnlCadastroLayout.setVerticalGroup(
             pnlCadastroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -132,34 +157,38 @@ public class FrCadUsuario extends javax.swing.JDialog {
                     .addGroup(pnlCadastroLayout.createSequentialGroup()
                         .addGap(31, 31, 31)
                         .addComponent(lblCadastro)
-                        .addGap(31, 31, 31))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 143, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlCadastroLayout.createSequentialGroup()
                         .addContainerGap()
                         .addComponent(jLabel1)
-                        .addGap(18, 18, 18)))
-                .addComponent(lblNomeCad)
-                .addGap(48, 48, 48)
+                        .addGap(102, 102, 102)
+                        .addComponent(lblNomeCad)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)))
                 .addComponent(edtNomeCad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(32, 32, 32)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jLabel2)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(edtEmailCad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
                 .addGroup(pnlCadastroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(pnlCadastroLayout.createSequentialGroup()
-                        .addComponent(edtEmailCad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(39, 39, 39)
                         .addComponent(lblDataNascCAD)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jFormattedTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(edtDataNascCad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(csCas))
-                .addGap(35, 35, 35)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(lblSenhaCad)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(edtSenhaCad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(lblConfirmSenha)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(edtConfirmSenhaCad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addGroup(pnlCadastroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnCancelarCad)
                     .addComponent(btnSalvarCad))
-                .addContainerGap(34, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -180,9 +209,95 @@ public class FrCadUsuario extends javax.swing.JDialog {
         // TODO add your handling code here:
     }//GEN-LAST:event_csCasActionPerformed
 
-    private void jFormattedTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jFormattedTextField1ActionPerformed
+    private void edtDataNascCadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_edtDataNascCadActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jFormattedTextField1ActionPerformed
+    }//GEN-LAST:event_edtDataNascCadActionPerformed
+
+    private void btnCancelarCadMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnCancelarCadMouseClicked
+        this.dispose();
+    }//GEN-LAST:event_btnCancelarCadMouseClicked
+
+    private void btnSalvarCadMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnSalvarCadMouseClicked
+        gravar();
+
+
+    }//GEN-LAST:event_btnSalvarCadMouseClicked
+    private void gravar() {
+        
+        //validar os campos
+        if(!verificarCampos()){
+            return;
+                    }
+        
+        
+        //ler os campos e guardar um objeto
+        Usuario usu = new Usuario();
+        usu.setNome(edtNomeCad.getText());
+        usu.setEmail(edtEmailCad.getText());
+        usu.setSenha(Util.calcularHash(new String(edtSenhaCad.getPassword())));
+        usu.setDataNascimento(Util.converterStringToDate(edtDataNascCad.getText()));
+        usu.setAtivo(csCas.isSelected());
+        
+        
+        
+        
+        //enviar para o banco de dados
+        UsuarioControler controler = new UsuarioControler();
+        if(controler.inserir(usu)){
+            JOptionPane.showMessageDialog(null, "Usuário Inserido");
+            this.dispose();
+        }
+    }
+
+    private boolean verificarCampos() {
+
+        if (edtNomeCad.getText().isEmpty()) {
+            JOptionPane.showMessageDialog(null, "Campo E-mail em branco!!!");
+            return false;
+        }
+        if (edtEmailCad.getText().isEmpty()) {
+            JOptionPane.showMessageDialog(null, "Campo Nome em branco!!!");
+            return false;
+        }
+        if (new String(edtSenhaCad.getPassword()).isEmpty()) {
+            JOptionPane.showMessageDialog( null, "Campo Senha em branco!!!");
+    
+        return false;
+        }
+        //^ - inicio de linha
+        //$ - final de linha
+        //[] -  conjunto de caracteres
+        //+ - quantidade de vezes que o conjunto apareceer
+        //+ - 1 ou mais
+        //* - 0 ou mais
+        //{5} - 5 vezes
+        //{2} - 2 vezes 
+
+            if (!edtNomeCad.getText().matches("^[\\p{L} ]+$")) {
+                JOptionPane.showMessageDialog(null, "O campo Nome possui formato inválido !!!");
+                return false;
+            }
+        if (!edtEmailCad.getText().matches("^[a-z0-9_.]+@[a-z0-9_.]+.[a-z]+$")) {
+            JOptionPane.showMessageDialog(null, "O campo E-mail possui formato inválido  !!!");
+            return false;
+        }
+
+        if (!edtDataNascCad.getText().matches("^[0-3]{1}[0-9]{1}/[0-1]{1}[0-9]{1}/[12]{1}[90]{1}[0-9]{1}[0-9]{1}$")) {
+            JOptionPane.showMessageDialog(null, "O campo Data de Nascimento possui formato inválido  !!!");
+            return false;
+        }
+        if(new String(edtSenhaCad.getPassword()).length() < 6){
+        JOptionPane.showMessageDialog(null, "A senha deve ser maior que 6 dígitos");
+        return false;
+    }
+        String senha = new String(edtSenhaCad.getPassword());
+        String confirmaSenha = new String(edtConfirmSenhaCad.getPassword());
+        if(!senha.equals(confirmaSenha)){
+            JOptionPane.showMessageDialog(null, " As senhas devem ser iguais!!!");
+            return false;
+        }
+        return true;
+    }
 
     /**
      * @param args the command line arguments
@@ -198,16 +313,24 @@ public class FrCadUsuario extends javax.swing.JDialog {
                 if ("Nimbus".equals(info.getName())) {
                     javax.swing.UIManager.setLookAndFeel(info.getClassName());
                     break;
+
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(FrCadUsuario.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(FrCadUsuario.class
+                    .getName()).log(java.util.logging.Level.SEVERE, null, ex);
+
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(FrCadUsuario.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(FrCadUsuario.class
+                    .getName()).log(java.util.logging.Level.SEVERE, null, ex);
+
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(FrCadUsuario.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(FrCadUsuario.class
+                    .getName()).log(java.util.logging.Level.SEVERE, null, ex);
+
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(FrCadUsuario.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(FrCadUsuario.class
+                    .getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
 
@@ -230,13 +353,15 @@ public class FrCadUsuario extends javax.swing.JDialog {
     private javax.swing.JButton btnCancelarCad;
     private javax.swing.JButton btnSalvarCad;
     private javax.swing.JCheckBox csCas;
+    private javax.swing.JPasswordField edtConfirmSenhaCad;
+    private javax.swing.JFormattedTextField edtDataNascCad;
     private javax.swing.JTextField edtEmailCad;
     private javax.swing.JTextField edtNomeCad;
     private javax.swing.JPasswordField edtSenhaCad;
-    private javax.swing.JFormattedTextField jFormattedTextField1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel lblCadastro;
+    private javax.swing.JLabel lblConfirmSenha;
     private javax.swing.JLabel lblDataNascCAD;
     private javax.swing.JLabel lblNomeCad;
     private javax.swing.JLabel lblSenhaCad;

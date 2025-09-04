@@ -5,6 +5,7 @@
  */
 package controler;
 
+import Model.Usuario;
 import java.awt.image.BufferedImage;
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
@@ -69,5 +70,47 @@ public class UsuarioControler {
      
      return false;
 }
+     public boolean inserir(Usuario usu){
+     String sql = "INSERT INTO tbusuario(nome, email, senha, datanasc, ativo) VALUES (?,?,?,?,?)";
+   
+     
+     GerenciadorConexao gerenciador = new GerenciadorConexao();
+     //declara as variaveis como nulas antes do try
+     //para poder usar no finally
+     
+     PreparedStatement comando = null;
+     ResultSet resultado = null;
+     
+     try{
+         comando = gerenciador.prepararComando(sql);
+         //define o valor decada variável(?) pela posição em que aparece no sql
+         comando.setString(1, usu.getNome());
+         comando.setString(2, usu.getEmail());
+         comando.setString(3, usu.getSenha());
+         comando.setDate(4, new java.sql.Date(usu.getDataNascimento().getTime()));
+         comando.setBoolean(5, usu.isAtivo());
+           
+         //executa o comando
+          comando.executeUpdate();
+         
+          return true;
+         
+         
+     }catch(SQLException e){
+         //caso ocorra um erro relacionado ao banco de dados
+         //exibe popup com erro
+         JOptionPane.showMessageDialog(null, e.getMessage());
+     }
+     
+     
+     finally{
+         //depois de executar o try dando erro ou não executa o finally
+         gerenciador.fecharConexao(comando, resultado);
+     }
+     
+     return false;
+}
+    
+    
     
 }
