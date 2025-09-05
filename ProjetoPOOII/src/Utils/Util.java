@@ -72,9 +72,23 @@ public class Util {
             System.err.println("Algoritmo não encontrado !!!");
         }
         return hashSHA1;
+        
     }
     
-    
+    public static String converterDateToStrig(Date data){
+        SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy");
+         String texto = "";   
+         
+         try{
+             //irá formatar a data para o formato dd/MM/yyyy
+             texto = formato.format(data);
+         }catch(Exception e){
+             JOptionPane.showMessageDialog(null, "Erro ao formatar a data");
+         }
+            
+    return texto;
+ 
+    }    
     
     
     

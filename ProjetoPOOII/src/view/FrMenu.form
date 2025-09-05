@@ -40,10 +40,13 @@
             <Property name="text" type="java.lang.String" value="Consultar"/>
           </Properties>
           <SubComponents>
-            <MenuItem class="javax.swing.JMenuItem" name="jMenuItem3">
+            <MenuItem class="javax.swing.JMenuItem" name="miConUsuarios">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Usu&#xe1;rios"/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="miConUsuariosActionPerformed"/>
+              </Events>
             </MenuItem>
             <MenuItem class="javax.swing.JMenuItem" name="mnConUsuarios">
               <Properties>

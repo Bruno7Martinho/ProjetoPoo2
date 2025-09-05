@@ -84,4 +84,14 @@ public class Usuario {
     }
     private Date dataNascimento;
     
+    public String getAtivoString(){
+        if(ativo){
+            return "Ativo";
+        }else{
+            return "Inativo";
+        }
+    }
+    
+    
+    
 }
