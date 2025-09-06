@@ -163,4 +163,56 @@ public class UsuarioControler {
         return lista;
     }
 
+    
+    public boolean alterar(Usuario usu) {
+        String sql = "UPDATE tbusuario SET  "
+                + "nome = ?, " //1
+                + "email = ?, " //2
+                + "datanasc = ?, " //3
+                + "ativo = ?"; //4
+        if(usu.getSenha() !=null){
+            sql += ",senha = ?, "; //5
+        }
+  
+               sql += " WHERE pkUsuario = ?"; //5 ou 6
+
+        GerenciadorConexao gerenciador = new GerenciadorConexao();
+        //declara as variaveis como nulas antes do try
+        //para poder usar no finally
+
+        PreparedStatement comando = null;
+        ResultSet resultado = null;
+
+        try {
+            comando = gerenciador.prepararComando(sql);
+            //define o valor decada variável(?) pela posição em que aparece no sql
+            comando.setString(1, usu.getNome());
+            comando.setString(2, usu.getEmail());
+            comando.setDate(3, new java.sql.Date(usu.getDataNascimento().getTime()));
+            comando.setBoolean(4, usu.isAtivo());
+            
+            if(usu.getSenha() !=null){
+            comando.setString(5, usu.getSenha());
+            comando.setInt(6, usu.getPkUsuario());
+            }else{
+                comando.setInt(5, usu.getPkUsuario());
+            }
+            //executa o comando
+            comando.executeUpdate();
+
+            return true;
+
+        } catch (SQLException e) {
+            //caso ocorra um erro relacionado ao banco de dados
+            //exibe popup com erro
+            JOptionPane.showMessageDialog(null, e.getMessage());
+        } finally {
+            //depois de executar o try dando erro ou não executa o finally
+            gerenciador.fecharConexao(comando, resultado);
+        }
+
+        return false;
+    }
+    
+    
 }

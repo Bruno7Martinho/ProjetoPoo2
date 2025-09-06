@@ -75,7 +75,7 @@ public class Util {
         
     }
     
-    public static String converterDateToStrig(Date data){
+    public static String converterDateToString(Date data){
         SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy");
          String texto = "";   
          
